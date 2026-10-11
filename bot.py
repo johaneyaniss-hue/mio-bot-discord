@@ -32,10 +32,12 @@ async def on_message(message):
                             "https://openrouter.ai/api/v1/chat/completions",
                             headers={
                                 "Authorization": f"Bearer {OPENROUTER_KEY}",
-                                "Content-Type": "application/json"
+                                "Content-Type": "application/json",
+                                "HTTP-Referer": "https://github.com",
+                                "X-Title": "MioBotDiscord"
                             },
                             json={
-                                "model": "openrouter/auto",
+                                "model": "openai/gpt-4o-mini",
                                 "messages": [
                                     {"role": "user", "content": message.content}
                                 ]
