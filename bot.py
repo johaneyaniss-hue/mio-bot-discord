@@ -6,15 +6,14 @@ from openai import OpenAI
 
 load_dotenv()
 
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-OPENROUTER_KEY = os.getenv("OPENROUTER_KEY")
+DISCORD_TOKEN = os.getenev("DISCORD_TOKEN") # Incolla qui il tuo token di Discord
+OPENROUTER_KEY = os.getenv("OPENROUTER_KEY") # Incolla qui la tua chiave OpenRouter
 
 # Inizializza il client di OpenRouter tramite la libreria OpenAI
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=OPENROUTER_KEY,
 )
-
 intents = discord.Intents.default()
 intents.message_content = True
 
