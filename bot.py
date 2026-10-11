@@ -1,8 +1,12 @@
+import discord
+from discord.ext import commands
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotemv
+
 load_dotenv()
 
 # Incolla qui la chiave presa da OpenRouter (inizia con sk-or-v1-...)
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 OPENROUTER_KEY = os.getenv("OPENROUTER_KEY")
 
 intents = discord.Intents.default()
