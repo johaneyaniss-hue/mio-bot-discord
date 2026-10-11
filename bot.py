@@ -78,4 +78,4 @@ async def info(ctx):
     embed.add_field(name="Sviluppatore", value="Progetto Custom Python", inline=False)
     await ctx.send(embed=embed)
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(DISCORD_TOKEN)
