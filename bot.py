@@ -42,19 +42,18 @@ async def on_message(message):
                             }
                         ) as response:
                             data = await response.json()
-                
-                if "choices" in data and len(data["choices"]) > 0:
-                    testo = data["choices"][0]["message"]["content"]
-                    
-                    # Spezza il testo se supera i 1900 caratteri
-                    for i in range(0, len(testo), 1900):
-                        await message.channel.send(testo[i:i+1900])
-                else:
-                    print("Errore OpenRouter:", data)
-                    await message.channel.send("Ops, errore nella risposta dall'IA.")
-            except Exception as e:
-                await message.channel.send("Ops, c'è stato un errore nel codice!")
-                print(f"Errore preciso: {e}")
+
+                    if "choices" in data and len(data["choices"]) > 0:
+                        testo = data["choices"][0]["message"]["content"]
+                        for i in range(0, len(testo), 1900):
+                            await message.channel.send(testo[i:i+1900])
+                    else:
+                        print("Errore OpenRouter:", data)
+                        await message.channel.send("Ops, errore nella risposta dall'IA.")
+                except Exception as e:
+                    await message.channel.send("Ops, c'è stato un errore nel codice!")
+                    print(f"Errore preciso: {e}")
+
 
     await bot.process_commands(message)
 
