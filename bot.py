@@ -27,20 +27,21 @@ async def on_message(message):
     if not message.content.startswith("!"):
         async with message.channel.typing():
             try:
-                response = requests.post(
-                    url="https://openrouter.ai/api/v1/chat/completions",
-                    headers={
-                        "Authorization": f"Bearer {OPENROUTER_KEY}",
-                        "Content-Type": "application/json"
-                    },
-                    json={
-                        "model": "openrouter/auto",
-                        "messages": [
-                            {"role": "user", "content": message.content}
-                        ]
-                    }
-                )
-                data = response.json()
+                async with aiohttp.ClientSession() as session:
+            async with session.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "openrouter/auto",
+                    "messages": [
+                        {"role": "user", "content": message.content}
+                    ]
+                }
+            ) as response:
+                data = await response.json()
                 
                 if "choices" in data and len(data["choices"]) > 0:
                     testo = data["choices"][0]["message"]["content"]
